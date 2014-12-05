@@ -1,0 +1,2 @@
+Default settings for chilli. User will not allow to change anything on this interface. Change if any will be submitted to device using CWMP or config files download
+When user reset the AP, the default config will be restored

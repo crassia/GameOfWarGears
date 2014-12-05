@@ -1,0 +1,18 @@
+#!/bin/sh
+do_wivi_config () {
+	if [ -f /wiviboot ]; then
+		echo "Booting using AP settings"
+	else
+		echo "Booting using default WiVi-AP config"
+		[ -f /rom/wivi.tgz ] && {
+			echo "--WiVi config restore--"
+			cd /
+			cp /rom/wivi.tgz /tmp
+			tar xzf /tmp/wivi.tgz
+			rm -f /tmp/wivi.tgz
+			touch /wiviboot
+			sync
+		}
+		
+	fi
+}
