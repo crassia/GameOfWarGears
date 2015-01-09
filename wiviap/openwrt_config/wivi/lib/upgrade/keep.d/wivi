@@ -1,0 +1,4 @@
+/etc/chilli.conf
+/etc/chilli/
+/etc/init.d/chilli
+/lib/upgrade/keep.d/

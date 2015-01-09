@@ -1,0 +1,5 @@
+configuing ACS:
+1/Install FreeAcs as per guides.
+2/Modifying easycwmp scripts as per carrierwrt patches.
+3/The MAC address was not automatically configured in UCI, so we do this script instead:
+wlan_mac=`$(ifconfig wlan0 | awk '/HWaddr/ { print $5 }')`

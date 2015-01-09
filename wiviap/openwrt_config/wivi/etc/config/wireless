@@ -1,0 +1,33 @@
+
+config wifi-device 'radio0'
+	option type 'mac80211'
+	option channel '11'
+	option hwmode '11g'
+	option path 'platform/qca953x_wmac'
+	option htmode 'HT20'
+	option txpower '26'
+	option country 'US'
+
+config wifi-iface
+	option device 'radio0'
+	option mode 'ap'
+	option encryption 'none'
+	option network 'wireless'
+	option ssid 'FreeWifi'
+
+config wifi-iface
+	option device 'radio0'
+	option mode 'ap'
+	option encryption 'psk-mixed'
+	option ssid 'HomeWifi'
+	option key '87654321'
+	option network 'HomeWifi'
+
+config wifi-iface
+	option device 'radio0'
+	option mode 'ap'
+	option ssid 'WiVi Community'
+	option network 'community'
+	option encryption 'psk-mixed'
+	option key 'wivirock'
+

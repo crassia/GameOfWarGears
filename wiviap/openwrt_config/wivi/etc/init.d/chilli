@@ -1,0 +1,23 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2014 OpenWrt.org
+
+START=60
+USE_PROCD=1
+PROG=/usr/sbin/chilli
+. /etc/chilli/functions
+start_service() {
+        echo 'Starting Chilli Service'
+#        . /etc/chilli/ifup.sh
+        /sbin/modprobe tun > /dev/null 2>&1
+        echo 1 > /proc/sys/net/ipv4/ip_forward
+        writeconfig
+        radiusconfig
+        iptables -F POSTROUTING -t nat
+        iptables -I POSTROUTING -t nat -o $HS_WANIF -j MASQUERADE
+        ifconfig $HS_LANIF 0.0.0.0
+        procd_open_instance
+        # -I runs in foreground, as procd requires
+        procd_set_param command "$PROG" --fg --pidfile /var/run/chilli.pid
+        procd_set_param respawn
+        procd_close_instance
+}
