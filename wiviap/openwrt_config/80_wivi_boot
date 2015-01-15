@@ -1,0 +1,33 @@
+#!/bin/sh
+do_wivi_config () {
+	
+		echo "Booting using default WiVi-AP config"
+		[ -f /rom/wivi.tgz ] && {
+			echo "--WiVi config restore--"
+			cd /
+			cp /rom/wivi.tgz /tmp
+			tar xzf /tmp/wivi.tgz
+			rm -f /tmp/wivi.tgz
+			touch /wiviboot
+			sync
+		}
+		
+	
+}
+do_personalize_ap () {
+	#getting the WLAN MAC address from system
+	wlanmac=`cat /sys/class/ieee80211/phy0/addresses`
+	#user password for web login should be = MAC address
+	username=`echo $wlanmac|sed 's/://g'`
+	#changing the root password for web interface
+	echo -e "$username\n$username" | passwd  $USER &> /dev/null
+	#replace the MAC address in /etc/config/easycwmp
+	sed -i "s/C46E1FE9984C/$wlanmac/" /etc/config/easycwmp
+	#fix the macaddress option in /etc/config/wireless
+	uci set wireless.radio0.macaddr=$wlanmac
+	uci commit
+
+}
+do_wivi_config
+do_personalize_ap
+

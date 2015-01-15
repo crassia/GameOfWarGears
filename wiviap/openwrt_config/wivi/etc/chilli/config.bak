@@ -76,7 +76,7 @@ HS_UAMDOMAINS="socifi.com positivezero.co.uk googleapis.com googleusercontent.co
 
 HS_UAMFORMAT=http://connect.socifi.com
 #   Same principal goes for HS_UAMHOMEPAGE.
-HS_UAMHOMEPAGE=none
+#HS_UAMHOMEPAGE=http://connect.socifi.com
 #HS_UAMHOMEPAGE=http://192.168.0.200/cake2/rd_cake/dynamic_details/chilli_browser_detect/
 
 #   This option will be configured to be the WISPr LoginURL as well
